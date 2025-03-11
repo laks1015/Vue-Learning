@@ -1,7 +1,9 @@
 const app = Vue.createApp({
     data() {
         return {
-            outPut: ""
+            output: '',
+            confirmedInput: ''
+
         }
     },
     methods:{
@@ -9,13 +11,21 @@ const app = Vue.createApp({
             alert("Hello World!");
         },
         userInput(event){
-            event.target.value = "";
-        }
-    },
+            // event.target.value = "";
+            this.output = event.target.value;
+        },
+        // outputText(event){
+        //     this.output = event.target.value;
+        // }
 
-    outputText(event){
-        this.outPut = event.target.value;
+        confirmInput(){
+        
+            this.confirmedInput = this.output;
     }
+
+}
+
+
 });
 
 app.mount("#assignment");
