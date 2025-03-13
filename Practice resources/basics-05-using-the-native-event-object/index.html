@@ -21,6 +21,8 @@
       <h2>Events in Action</h2>
       <button v-on:click="add(10)">Add 10</button>
       <button v-on:click="reduce(5)">Subtract 5</button>
+      <!-- <button @:click="reduce(5)">Subtract 5</button> -->
+
       <p>Result: {{ counter }}</p>
       <!-- bind the value of the input to name so that you can access the value property in another fucntion -->
       <!-- old way of having 2 different event lsiteners- one to get input and the opther to bind the input to the value property -->
@@ -32,7 +34,18 @@
       <input type="text" v-model="name" />
 
       <button v-on:click="resetInput()">Reset Input</button>
-      <p>Your Name: {{ outputFullName() }}</p>
+      <!-- <p>Your Name: {{ outputFullName() }}</p> -->
+      <p>Your Name: {{ fullname }}</p>
+      <!-- important - we dont call it like a function liek this () we just call it liek a variable akak point to it and then vue does the rest  -->
+
     </section>
   </body>
 </html>
+
+<!-- shortcuts:
+v-on:click -> @click=
+v-bind:value -> :value=
+v-model -> v-bind:value and v-on:input 
+
+
+-->
