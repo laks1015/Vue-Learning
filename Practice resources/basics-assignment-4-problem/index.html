@@ -9,7 +9,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="https://unpkg.com/vue@3.4.9/dist/vue.global.js"></script>
+
     <script src="app.js" defer></script>
   </head>
   <body>
@@ -19,18 +20,22 @@
     <section id="assignment">
       <!-- 1) Fetch the user input and use it as a CSS class -->
       <!-- The entered class should be added to the below paragraph -->
-      <input type="text" />
+      <input type="text" v-model="userInput"/>
       <!-- (available classes: "user1", "user2") -->
-      <p>
-        Style me!
+      <!-- <p :class="{user1: user1, user2: user2, visibleToggle}"> -->
+      <p :class="[userInput, visibleToggle]">
+
+        {{userInput}}
       </p>
-      <button>Toggle Paragraph</button>
+      <button @click="toggleParagraph()">Toggle Paragraph</button>
       <!-- 2) Use the "visible" and "hidden" classes to show/ hide the above paragraph -->
       <!-- Clicking the button should toggle between the two options -->
 
       <!-- 3) Add dynamic inline styling to the below paragraph and let the user enter a background-color -->
-      <input type="text" />
-      <p>Style me inline!</p>
+      <input type="text" v-model="inputColor" />
+      <p :style="{backgroundColor: inputColor}">Style me inline!</p>
     </section>
   </body>
 </html>
+
+<!-- remmeber v-model is input and value combined ! so it automatically stores the value in that varaible deifned in v-model -->
