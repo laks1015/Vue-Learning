@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@3.4.9/dist/vue.global.js"></script>
+
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Monster Slayer</h1>
+    </header>
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Monster Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="monsterBarStyles"></div>
+        </div>
+      </section>
+      <section id="player" class="container">
+        <h2>Your Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value" :style="playerBarStyles"></div>
+        </div>
+      </section>
+      <section class="container" v-if="winner">
+        <h2>Game Over!</h2>
+        <h3>{{gameMessage}}</h3>
+        <button @click="startNewGame">START NEW GAME</button>
+      </section>
+      <section id="controls" v-if="!winner">
+        <button @click="attackMonster" :disabled="winner">ATTACK</button>
+        <!-- keep logic out of HTML -->
+        <!-- <button @click="specialAttackMonster" :disabled="currentRound% 3 !== 0">SPECIAL ATTACK</button> -->
+        <button
+          @click="specialAttackMonster"
+          :disabled="useSpecialAttack || winner"
+        >
+          SPECIAL ATTACK
+        </button>
+
+        <button @click="healPlayer" :disabled="winner">HEAL</button>
+        <button @click="surrender" :disabled="winner">SURRENDER</button>
+      </section>
+
+      <section id="log" class="container">
+        <h2>Battle Log</h2>
+        <ul>
+          <li v-for="battleMessage in battleMessages">
+            <span :class="{'log--player': battleMessage.actionBy === 'player', 'log--monster': battleMessage.actionBy === 'monster'}"
+              >{{battleMessage.actionBy === 'player' ? 'Player ' :
+              'Monster '}}</span
+            >
+            <span v-if="battleMessage.actionType === 'heal'"
+              >heals himself for
+              <span class="log--heal">{{battleMessage.actionValue}}</span>
+            </span>
+
+            <span v-else-if="battleMessage.actionType === 'special attack'">
+             special attacks and deals <span class="log--damage">{{battleMessage.actionValue}}</span>
+            </span>
+
+
+            <span v-else-if="battleMessage.actionType === 'surrenders'" class="log--damage">
+             surrenders 
+             </span>
+
+            <span v-else>
+              attacks and deals <span class="log--damage">{{battleMessage.actionValue}}</span>
+            </span>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
