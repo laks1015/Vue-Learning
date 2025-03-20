@@ -168,7 +168,6 @@ const app = Vue.createApp({
             // monster attacks player when player heals
 
             this.addBattleMessage('player', 'heal', healPlayerValue);
-            this.addBattleMessage('monster', 'attack', attackPlayerValue);
 
             this.attackPlayer();
         },
