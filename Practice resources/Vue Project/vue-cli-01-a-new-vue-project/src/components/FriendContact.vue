@@ -1,0 +1,40 @@
+<!-- this is a component to display a friends contact component -->
+ <template>
+    <li>
+        <h2>{{ friend.name }}</h2>
+        <button @click="toggleDetails">{{ detailsAreVisible ? 'Hide' : 'Show' }} Details</button>
+
+
+    </li>
+
+    <ul v-if="detailsAreVisible">
+        <li><strong>Phone:</strong> {{ friend.phone }}</li>
+        <li><strong>Email:</strong>{{ friend.email }}</li>
+    </ul>
+    
+ </template>
+
+ <script>
+export default {
+    // config options for this specific component
+    data(){
+        // this data is independent of the data in the parent component (vue app component)
+        return{
+            detailsAreVisible: false,
+            friend:
+            {
+                id: 'manuel',
+                    name: 'Manuel Lorenz',
+                    phone: '01234 5678 991',
+                    email: 'manuel@localhost.com'
+            }
+        }
+    },
+    methods: {
+        toggleDetails(){
+            this.detailsAreVisible = !this.detailsAreVisible;
+        }
+    }
+};
+ </script>
+ 
