@@ -20,12 +20,45 @@
 
 export default {
     // config options for this specific component
-    props:['name', 
-    'phoneNumber',
-    'emailAddress',
-    'isFavorite'
-    ], // this is where you define the properties that this component expects to receive from the outside
-    // we suse camelcase so that it can be used as a variable 
+    // props:['name', 
+    // 'phoneNumber',
+    // 'emailAddress',
+    // 'isFavorite'
+    // ], // this is where you define the properties that this component expects to receive from the outside
+    // // we suse camelcase so that it can be used as a variable 
+
+    //because props can get complex, we have a look at passing it as an object vs an array
+    props:{
+         //type setting
+        // name: String,
+        // phoneNumber: String,
+        // emailAddress: String,
+        // isFavorite: String
+
+        // but we can gt more granualr and set more rules on what data we expect to reciev in these props
+        name: {
+            type: String,
+            required: true
+        },
+        phoneNumber: {
+            type: String,
+            required: true
+        },
+        emailAddress: {
+            type: String,
+            required: true
+        },
+        isFavorite: {
+            type: String,
+            required: false,
+            //defau;lt value if somehing is not rquired
+            default: '0', 
+            validator(value){
+                return value === '0' || value === '1';
+            } //this is a custom validator to make sure that the value is either 0 or 1
+        },
+        
+    }, 
     data(){
         // this data is independent of the data in the parent component (vue app component)
         return{

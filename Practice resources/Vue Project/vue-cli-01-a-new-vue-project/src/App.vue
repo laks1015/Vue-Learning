@@ -15,7 +15,8 @@
       <friend-contact name="Manuel Lorenz" phone-number="01234 5678 991"
         email-address="manuel@localhost.com" is-favorite="1"></friend-contact>
       <friend-contact name="Julie Jones" phone-number="01234 5678 992"
-        email-address="julie@localhost.com" is-favorite="0"></friend-contact>
+        email-address="julie@localhost.com"></friend-contact>
+        <!-- here we can omit isFavorite prop because e added a default value to the prop in FriendContact speven if there ist one that is set, the deaut will be 0 -->
 
     </ul>
   </section>
