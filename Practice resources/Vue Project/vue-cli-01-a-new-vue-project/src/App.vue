@@ -1,19 +1,24 @@
 <!-- This is the main App filewhich holds the app component -->
 <!-- can reuse fetures/components in other files -->
- <!--  Vue app vs ue components
+<!--  Vue app vs vue components
  every component  is like a mini appp, and you can combine multiple compeontns into an app to build complex interfraces
  
  -->
 
 <template>
-    <section>
-      <header><h1>My friends:</h1></header>  
-        <ul>
-            <friend-contact></friend-contact>
-            <friend-contact></friend-contact>
+  <section>
+    <header>
+      <h1>My friends:</h1>
+    </header>
+    <ul>
+      <!-- props = custom html proprties -->
+      <friend-contact name="Manuel Lorenz" phone-number="01234 5678 991"
+        email-address="manuel@localhost.com" is-favorite="1"></friend-contact>
+      <friend-contact name="Julie Jones" phone-number="01234 5678 992"
+        email-address="julie@localhost.com" is-favorite="0"></friend-contact>
 
-        </ul>
-    </section>
+    </ul>
+  </section>
 
 </template>
 
@@ -23,34 +28,34 @@ import FriendContact from './components/FriendContact.vue';
 
 export default {
   components: { FriendContact },
-    data() {
-        return {
-            friends: [
-                {
-                    id: 'manuel',
-                    name: 'Manuel Lorenz',
-                    phone: '01234 5678 991',
-                    email: 'manuel@localhost.com'
-                },
-                {
-                    id: 'julie',
-                    name: 'Julie Jones',
-                    phone: '01234 5678 992',
-                    email: 'julie@localhost.com'
-                }
-
-
-            ]
+  data() {
+    return {
+      friends: [
+        {
+          id: 'manuel',
+          name: 'Manuel Lorenz',
+          phone: '01234 5678 991',
+          email: 'manuel@localhost.com'
+        },
+        {
+          id: 'julie',
+          name: 'Julie Jones',
+          phone: '01234 5678 992',
+          email: 'julie@localhost.com'
         }
+
+
+      ]
     }
+  }
 };
 
 
 </script>
 
 <style>
-
 @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+
 * {
   box-sizing: border-box;
 }
