@@ -107,7 +107,7 @@ export default {
             // }
 
             // we can simplify this now because its a boolean
-            this.friendIsFavorite = !this.friendIsFavorite;
+            this.FriendIsFavorite = !this.FriendIsFavorite;
         }
 
     }

@@ -14,7 +14,7 @@
       <!-- props = custom html proprties -->
       <!-- have to use v:bind to use dynamic binding if it accepts sommethign els other than a string and ou can even put a javascript conditional expression in there too -->
       <friend-contact v-for="friend in friends" v-bind:key="friend.id" :name="friend.name" :phone-number="friend.phone"
-        :email-address="friend.email" v-bind:is-favorite="true"></friend-contact>
+        :email-address="friend.email" v-bind:is-favorite="friend.isFavorite"></friend-contact>
 
 <!-- now we can comment this out because wwe dynamically loop throuhg EACH freind in the friends array and dynamically bind each prop -->
       <!-- <friend-contact name="Julie Jones" phone-number="01234 5678 992"
@@ -39,13 +39,16 @@ export default {
           id: 'manuel',
           name: 'Manuel Lorenz',
           phone: '01234 5678 991',
-          email: 'manuel@localhost.com'
+          email: 'manuel@localhost.com',
+          isFavorite: true
         },
         {
           id: 'julie',
           name: 'Julie Jones',
           phone: '01234 5678 992',
-          email: 'julie@localhost.com'
+          email: 'julie@localhost.com',
+          isFavorite: false
+
         }
 
 
