@@ -1,7 +1,7 @@
 <!-- this is a component to display a friends contact component -->
  <template>
     <li>
-        <h2>{{ name }} {{ FriendIsFavorite === '1' ? '(Favorite!)' : '' }}</h2>
+        <h2>{{ name }} {{ FriendIsFavorite ? '(Favorite!)' : '' }}</h2>
         <button @click="toggleFavorite">Toggle Favorite</button>
 
         <button @click="toggleDetails">{{ detailsAreVisible ? 'Hide' : 'Show' }} Details</button>
@@ -49,13 +49,13 @@ export default {
             required: true
         },
         isFavorite: {
-            type: String,
+            type: Boolean,
             required: false,
             //defau;lt value if somehing is not rquired
-            default: '0', 
-            validator(value){
-                return value === '0' || value === '1';
-            } //this is a custom validator to make sure that the value is either 0 or 1
+            default: false, 
+            // validator(value){
+            //     return value === '0' || value === '1';
+            // } //this is a custom validator to make sure that the value is either 0 or 1
         },
         
     }, 
@@ -63,13 +63,15 @@ export default {
         // this data is independent of the data in the parent component (vue app component)
         return{
             detailsAreVisible: false,
-            friend:
-            {
-                id: 'manuel',
-                    name: 'Manuel Lorenz',
-                    phone: '01234 5678 991',
-                    email: 'manuel@localhost.com'
-            },
+
+            // can gt rid of fummy friend contact because we dynamically loop thoruhg eeach friend in App
+            // friend:
+            // {
+            //     id: 'manuel',
+            //         name: 'Manuel Lorenz',
+            //         phone: '01234 5678 991',
+            //         email: 'manuel@localhost.com'
+            // },
             FriendIsFavorite: this.isFavorite, 
             // here we jsut took the value from Parent prop called isFriednFavorite and assigned its passed down value to a new value in the child compoentn nad now because that  value is techincally 'defined' as a variable in child compoennt
             // it can b used legally in the child compoennt file and in fucntions that are defined in the child compoennt file
@@ -98,11 +100,14 @@ export default {
 
         toggleFavorite(){
             console.log(this.FriendIsFavorite);
-            if(this.FriendIsFavorite === '1'){
-                this.FriendIsFavorite = '0';
-            }else{  
-                this.FriendIsFavorite = '1';
-            }
+            // if(this.FriendIsFavorite === '1'){
+            //     this.FriendIsFavorite = '0';
+            // }else{  
+            //     this.FriendIsFavorite = '1';
+            // }
+
+            // we can simplify this now because its a boolean
+            this.friendIsFavorite = !this.friendIsFavorite;
         }
 
     }

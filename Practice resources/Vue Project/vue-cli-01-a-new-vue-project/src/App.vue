@@ -12,11 +12,14 @@
     </header>
     <ul>
       <!-- props = custom html proprties -->
-      <friend-contact name="Manuel Lorenz" phone-number="01234 5678 991"
-        email-address="manuel@localhost.com" is-favorite="1"></friend-contact>
-      <friend-contact name="Julie Jones" phone-number="01234 5678 992"
-        email-address="julie@localhost.com"></friend-contact>
-        <!-- here we can omit isFavorite prop because e added a default value to the prop in FriendContact speven if there ist one that is set, the deaut will be 0 -->
+      <!-- have to use v:bind to use dynamic binding if it accepts sommethign els other than a string and ou can even put a javascript conditional expression in there too -->
+      <friend-contact v-for="friend in friends" v-bind:key="friend.id" :name="friend.name" :phone-number="friend.phone"
+        :email-address="friend.email" v-bind:is-favorite="true"></friend-contact>
+
+<!-- now we can comment this out because wwe dynamically loop throuhg EACH freind in the friends array and dynamically bind each prop -->
+      <!-- <friend-contact name="Julie Jones" phone-number="01234 5678 992"
+        email-address="julie@localhost.com"></friend-contact> -->
+      <!-- here we can omit isFavorite prop because e added a default value to the prop in FriendContact speven if there ist one that is set, the deaut will be 0 -->
 
     </ul>
   </section>
