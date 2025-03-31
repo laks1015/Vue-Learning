@@ -11,15 +11,24 @@
       <h1>My friends:</h1>
     </header>
     <ul>
-      <!-- props = custom html proprties -->
-      <!-- have to use v:bind to use dynamic binding if it accepts sommethign els other than a string and ou can even put a javascript conditional expression in there too -->
-      <friend-contact v-for="friend in friends" v-bind:key="friend.id" :name="friend.name" :phone-number="friend.phone"
-        :email-address="friend.email" v-bind:is-favorite="friend.isFavorite"></friend-contact>
 
-<!-- now we can comment this out because wwe dynamically loop throuhg EACH freind in the friends array and dynamically bind each prop -->
-      <!-- <friend-contact name="Julie Jones" phone-number="01234 5678 992"
-        email-address="julie@localhost.com"></friend-contact> -->
-      <!-- here we can omit isFavorite prop because e added a default value to the prop in FriendContact speven if there ist one that is set, the deaut will be 0 -->
+      <!-- we use props to pass info from paretn and child
+       now we want to pass info from child to paren using event emitting-->
+      <!-- have to use v:bind to use dynamic binding if it accepts sommethign els other than a string and ou can even put a javascript conditional expression in there too -->
+      <friend-contact 
+      v-for="friend in friends" 
+      v-bind:key="friend.id" 
+      :name="friend.name" 
+      :phone-number="friend.phone"
+      :email-address="friend.email" 
+      v-bind:is-favorite="friend.isFavorite"
+      :id="friend.id"
+      @toggle-favorite="toggleFavoriteStatus"
+        
+      ></friend-contact>
+        <!-- @event to listrn to = what function should be called  from the methods section-->
+
+
 
     </ul>
   </section>
@@ -53,6 +62,20 @@ export default {
 
 
       ]
+    }
+  },
+
+  methods: {
+    // toggleFavoriteStatus(friendId) {
+    //   const friend = this.friends.find(friend => friend.id === friendId);
+    //   friend.isFavorite = !friend.isFavorite;
+      
+    // }
+    // ,
+    toggleFavoriteStatus(friendId) {
+      console.log('toggleFavoriteStatus is called! after listening to the event');
+      const identifiedFriend = this.friends.find(friend => friend.id === friendId);
+      identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
     }
   }
 };
@@ -118,6 +141,7 @@ header {
   color: white;
   padding: 0.05rem 1rem;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
+  margin: 2px;
 }
 
 #app button:hover,

@@ -1,7 +1,7 @@
 <!-- this is a component to display a friends contact component -->
  <template>
     <li>
-        <h2>{{ name }} {{ FriendIsFavorite ? '(Favorite!)' : '' }}</h2>
+        <h2>{{ name }} {{ isFavorite ? '(Favorite!)' : '' }}</h2>
         <button @click="toggleFavorite">Toggle Favorite</button>
 
         <button @click="toggleDetails">{{ detailsAreVisible ? 'Hide' : 'Show' }} Details</button>
@@ -20,22 +20,17 @@
 
 export default {
     // config options for this specific component
-    // props:['name', 
-    // 'phoneNumber',
-    // 'emailAddress',
-    // 'isFavorite'
-    // ], // this is where you define the properties that this component expects to receive from the outside
+     // this is where you define the properties that this component expects to receive from the outside
     // // we suse camelcase so that it can be used as a variable 
+
+
 
     //because props can get complex, we have a look at passing it as an object vs an array
     props:{
-         //type setting
-        // name: String,
-        // phoneNumber: String,
-        // emailAddress: String,
-        // isFavorite: String
-
-        // but we can gt more granualr and set more rules on what data we expect to reciev in these props
+        id:{
+            type: String,
+            required: true
+        },
         name: {
             type: String,
             required: true
@@ -59,6 +54,25 @@ export default {
         },
         
     }, 
+
+    // we also can define the properties of the event. while it is ecommended to do the properties o the variables it is optonal to do it for events
+    // this helps documents what events this ompeoent can expect without needing to look at the methods
+    emit:[
+        'toggle-favorite'],
+
+
+    // // detailed version
+    // emit: {
+    //     'toggle-favorite': function(id){
+    //         // this functoion is called when the event is emitted and it is saying what we can expect to receive (id)
+    //         if(id === this.id){
+    //             return true;
+    //             // add some validation
+    //     }
+    //     }
+    // },
+
+
     data(){
         // this data is independent of the data in the parent component (vue app component)
         return{
@@ -72,9 +86,7 @@ export default {
             //         phone: '01234 5678 991',
             //         email: 'manuel@localhost.com'
             // },
-            FriendIsFavorite: this.isFavorite, 
-            // here we jsut took the value from Parent prop called isFriednFavorite and assigned its passed down value to a new value in the child compoentn nad now because that  value is techincally 'defined' as a variable in child compoennt
-            // it can b used legally in the child compoennt file and in fucntions that are defined in the child compoennt file
+         
         }
     },
     methods: {
@@ -100,14 +112,15 @@ export default {
 
         toggleFavorite(){
             console.log(this.FriendIsFavorite);
-            // if(this.FriendIsFavorite === '1'){
-            //     this.FriendIsFavorite = '0';
-            // }else{  
-            //     this.FriendIsFavorite = '1';
-            // }
 
-            // we can simplify this now because its a boolean
-            this.FriendIsFavorite = !this.FriendIsFavorite;
+            // this.FriendIsFavorite = !this.FriendIsFavorite;
+            // this allows you to ccreate your own custom vent that you can emit to the parent compoennt
+            // this is how you can pass data from child to parent
+
+            // name of custom event i the first parameteer in camelcase
+            // the second parameter is the data that you want to pass to the parent compoennt
+            this.$emit('toggle-favorite', this.id);
+            // this means that the tiggl-favorite event ill pass this.ud as a proeprty to whoever (the [arent] that is listening. so the lsitener can use the value on their side)
         }
 
     }
