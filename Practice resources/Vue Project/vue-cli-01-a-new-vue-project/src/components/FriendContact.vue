@@ -5,6 +5,7 @@
         <button @click="toggleFavorite">Toggle Favorite</button>
 
         <button @click="toggleDetails">{{ detailsAreVisible ? 'Hide' : 'Show' }} Details</button>
+        <button @click="deleteFriend">Delete</button>
 
 
     </li>
@@ -58,7 +59,7 @@ export default {
     // we also can define the properties of the event. while it is ecommended to do the properties o the variables it is optonal to do it for events
     // this helps documents what events this ompeoent can expect without needing to look at the methods
     emit:[
-        'toggle-favorite'],
+        'toggle-favorite', 'delete-friend'],
 
 
     // // detailed version
@@ -121,6 +122,14 @@ export default {
             // the second parameter is the data that you want to pass to the parent compoennt
             this.$emit('toggle-favorite', this.id);
             // this means that the tiggl-favorite event ill pass this.ud as a proeprty to whoever (the [arent] that is listening. so the lsitener can use the value on their side)
+        },
+
+        deleteFriend(){
+            // this.$emit('delete-friend', this.id);
+            // this is how you can pass data from child to parent
+            // emit a custom event because FreindContact is a child compoennt and it wants to tell the parent compoennt to delete a friend
+            // the parent compoennt will listen for this event and then delete the friend
+            this.$emit('delete-friend', this.id);
         }
 
     }

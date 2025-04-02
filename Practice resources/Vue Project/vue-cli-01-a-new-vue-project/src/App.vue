@@ -25,7 +25,7 @@
       v-bind:is-favorite="friend.isFavorite"
       :id="friend.id"
       @toggle-favorite="toggleFavoriteStatus"
-        
+        @delete-friend="deleteFriend"
       ></friend-contact>
         <!-- @event to listrn to = what function should be called  from the methods section-->
 
@@ -92,6 +92,15 @@ export default {
     // add newFriend tje the array
     this.friends.push(newFriend);
   },
+
+  deleteFriend(friendId){
+    // returns a new array on the array that yopu are calling ecept for th elements that you are filtering out
+    this.friends = this.friends.filter(friend => friend.id !== friendId);
+    // // find the index of the friend with the id
+    // const friendIndex = this.friends.findIndex(friend => friend.id === friendId);
+    // // remove the friend from the array
+    // this.friends.splice(friendIndex, 1);
+  }
   }
 };
 
