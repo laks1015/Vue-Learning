@@ -21,12 +21,13 @@
 
 <script>
 
-import TheHeader from './components/TheHeader.vue';
+import TheHeader from './components/Layout/TheHeader.vue';
 // import BadgeList from './components/BadgeList.vue';
 // import UserInfo from './components/UserInfo.vue';
 // import CourseGoals from './components/CourseGoals.vue';
 import ManageGoals from './components/ManageGoals.vue';
 import ActiveGoals from './components/ActiveGoals.vue';
+import ErrorAlert from './components/UI/ErrorAlert.vue';
 
 export default {
 // register component locally here so that it is only available in this file
@@ -34,6 +35,7 @@ export default {
    'the-header' : TheHeader,
    'manage-goals': ManageGoals,
     'active-goals': ActiveGoals,
+    'error-alert': ErrorAlert,
   //  'badge-list': BadgeList,
   //  'user-info': UserInfo,
   //  'course-goals': CourseGoals,
