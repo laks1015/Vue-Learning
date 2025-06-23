@@ -22,15 +22,17 @@ export default{
         'learning-resource': LearningResource
     },
 
-    props: { 
-        // props are used to pass data from parent to child component
-        // because we are using v-for in the app.vue file, we need to pass the storedResources array as a prop
-        // this will allow us to use the storedResources array in this component
-        resources: {
-            type: Array,
-            required: true
-        }
-    },
+    // inject: { 
+    //     // props are used to pass data from parent to child component
+    //     // because we are using v-for in the app.vue file, we need to pass the storedResources array as a prop
+    //     // this will allow us to use the storedResources array in this component
+    //     resources: {
+    //         type: Array,
+    //         required: true
+    //     }
+    // },
+
+    inject: ['resources'],
 }
 </script>
 

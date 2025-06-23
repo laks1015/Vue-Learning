@@ -1,6 +1,6 @@
 <template>
     <!-- this is going to be a wrapper for the button styling -->
-    <button :type="type" :class="mode" @click="$emit('click')">
+    <button :class="mode">
         <!-- content inside the button gets passed into this slot -->
         <slot></slot>
     </button>
@@ -10,7 +10,7 @@
 
 export default {
     // let's configure what this button does through props
-    props: ['type', 'mode'],
+    props: ['mode'],
 
 }
 </script>
