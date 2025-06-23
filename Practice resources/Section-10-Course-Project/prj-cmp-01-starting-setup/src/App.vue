@@ -9,6 +9,8 @@
                 <a :href="resource.link" target="_blank">Visit</a>
             </li>
         </ul> -->
+        <the-header title="Remember these Learning Resources"></the-header>
+        <!-- <the-header :title="storedResources[0].title"></the-header> -->
         <stored-resources :resources="storedResources"></stored-resources>
         <!-- we are passing the storedResources array as a prop to the stored-resources component and is binded to resources in the toredResources.vue-->
         <!-- this will allow us to use the storedResources array in the stored-resources component -->
@@ -20,11 +22,13 @@
 
 // import LearningResource from './components/learning-resources/LearningResource.vue';
 import storedResources  from './components/learning-resources/StoredResources.vue';
+import TheHeader from './components/layouts/TheHeader.vue'; 
 
 export default {
     components: {
         // 'learning-resource': LearningResource,
-        'stored-resources': storedResources
+        'stored-resources': storedResources,
+        'the-header': TheHeader
     },
     data() {
         return {

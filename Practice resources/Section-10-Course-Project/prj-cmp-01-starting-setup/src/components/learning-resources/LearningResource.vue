@@ -4,7 +4,8 @@
         <base-card>
             <header>
                 <h3>{{title}}</h3>
-                <button>Delete</button>
+                <!-- <button>Delete</button> -->
+                 <base-button mode="flat" @click="$emit('delete')">Delete</base-button>
             </header>
             <p>{{description}}</p>
             <nav>
