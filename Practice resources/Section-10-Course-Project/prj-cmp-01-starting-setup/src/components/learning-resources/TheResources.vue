@@ -54,7 +54,10 @@ export default{
     provide(){
         // this will allow us to use the storedResources array in the child components
         return {
-            resources: this.storedResources
+            resources: this.storedResources,
+            // point at the addResource method so that we can use it in the AddResource component aand then you can INJECT it in the AddResource component
+            // this is a good practice to follow so that we can reuse the method in other components
+            addResource: this.addResource
         };
     },
 
@@ -74,6 +77,30 @@ export default{
         setSelectedTab(tab) {
             this.selectedTab = tab;
             console.log('Selected tab:', this.selectedTab);
+        },
+
+        // we need to be able to call this method from the AddResource component
+        // so we will use the $emit method to emit an event from the AddResource component
+        // and then we will listen to that event in the TheResources component
+        // and call this method to add the resource to the storedResources array
+        addResource(title, description, link) {
+            // this method will be called when the form is submitted
+            //we want to add the resource to the storedResources array using the submitted data in the Add Resource component
+            const newResource = {   
+                id: Math.random().toString(36).substring(2, 9), // generate a random id
+                title: title,
+                description: description,
+                link: link
+            };
+            // add to bottom of array
+            // this.storedResources.push(newResource);
+
+            // add to top of array
+            this.storedResources.unshift(newResource);
+
+            console.log('New resource added:', newResource);
+            // reset the selected tab to stored-resources after adding a new resource
+            this.selectedTab = 'stored-resources';
         }
     },
 }

@@ -30,7 +30,7 @@ export default {
     components: {
         // 'learning-resource': LearningResource,
         'the-header': TheHeader,
-        'the-resources': TheResources
+        'the-resources': TheResources,
     },
     // data() {
     //     return {
