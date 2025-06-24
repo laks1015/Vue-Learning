@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <teleport to="body">
+            <div>
         <div class="backdrop" @click="$emit('close')"></div>
         <dialog open>
 
@@ -27,6 +28,8 @@
 
         </dialog>
     </div>
+    </teleport>
+
 </template>
 
 <script>
@@ -79,7 +82,7 @@ header {
 }
 
 .error{
-  background-color: #610005;
+  background-color: #a90810;
 
 }
 

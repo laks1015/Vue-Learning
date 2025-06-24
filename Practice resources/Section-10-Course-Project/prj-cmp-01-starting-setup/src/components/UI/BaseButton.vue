@@ -11,6 +11,7 @@
 export default {
     // let's configure what this button does through props
     props: ['mode'],
+    
 
 }
 </script>

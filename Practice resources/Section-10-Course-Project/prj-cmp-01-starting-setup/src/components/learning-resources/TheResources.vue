@@ -57,7 +57,8 @@ export default{
             resources: this.storedResources,
             // point at the addResource method so that we can use it in the AddResource component aand then you can INJECT it in the AddResource component
             // this is a good practice to follow so that we can reuse the method in other components
-            addResource: this.addResource
+            addResource: this.addResource,
+            deleteResource: this.removeResource
         };
     },
 
@@ -101,6 +102,18 @@ export default{
             console.log('New resource added:', newResource);
             // reset the selected tab to stored-resources after adding a new resource
             this.selectedTab = 'stored-resources';
+        },
+
+        removeResource(resID){
+
+            // update the storedResources array by filtering out the resource with the given id
+
+            const resourceToDelete = this.storedResources.find(resource => resource.id === resID);
+            this.storedResources.splice(this.storedResources.indexOf(resourceToDelete), 1);
+
+            
+            console.log(this.storedResources.length + ' resources left after deletion.');
+
         }
     },
 }

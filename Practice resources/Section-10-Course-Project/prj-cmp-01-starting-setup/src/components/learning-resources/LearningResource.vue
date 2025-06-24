@@ -5,7 +5,7 @@
             <header>
                 <h3>{{title}}</h3>
                 <!-- <button>Delete</button> -->
-                 <base-button mode="flat" @click="$emit('delete')">Delete</base-button>
+                 <base-button mode="flat" @click="deleteResource(id)">Delete</base-button>
             </header>
             <p>{{description}}</p>
             <nav>
@@ -26,6 +26,10 @@ export default{
     // },
     props: { 
         // props are used to pass data from parent to child component
+        id:{
+            type: String,
+            required: true
+        },
         title: {
             type: String,
             required: true
@@ -39,6 +43,7 @@ export default{
             required: true
         }
     },
+  inject: ['deleteResource'],
 }
 </script>
 
