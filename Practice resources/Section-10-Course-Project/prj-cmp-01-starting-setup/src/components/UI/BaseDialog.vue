@@ -4,7 +4,7 @@
         <dialog open>
 
             <!-- add a slot so any information can go here -->
-            <header>
+            <header :class="status">
                 <slot name="heading">
                     <!-- default heading if no heading is suppied in slot -->
                     <h2>{{ title }}</h2>
@@ -31,14 +31,17 @@
 
 <script>
 export default {
-    props: {
-        title: {
-            type: String,
-            default: 'Default Dialog Title',
-        },
-
+  props: {
+    title: {
+      type: String,
+      required: true
     },
-
+    status: {
+      type: String,
+      default: '',
+      validator: value => ['error', 'success', 'warning', ''].includes(value)
+    }
+  },
     emits: ['close']
 }
 </script>
@@ -75,6 +78,14 @@ header {
   padding: 1rem;
 }
 
+.error{
+  background-color: #610005;
+
+}
+
+.success{
+    background-color: #006110;
+}
 header h2 {
   margin: 0;
 }

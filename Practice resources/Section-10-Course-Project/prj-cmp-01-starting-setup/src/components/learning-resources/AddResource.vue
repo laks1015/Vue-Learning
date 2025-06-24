@@ -1,7 +1,7 @@
 <template>
 
     <div>
-    <base-dialog v-if="inputIsInvalid" title="Input is invalid" @close="closeError()">
+    <base-dialog v-if="inputIsInvalid" title="Input is invalid" @close="closeError()" status="error">
 
     <template #main-content>
         <h3>Oh no, some content is not valid</h3>
@@ -12,7 +12,7 @@
         <!-- this will hide the dialof because dialog shows when inputIsValid is true -->
 
     <template #actions>
-        <base-button @click="inputIsInvalid = false">Close</base-button>
+        <base-button @click="closeError()">Close</base-button>
     </template>
 
     </base-dialog>
