@@ -1,8 +1,10 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div class="form-control">
+    <div class="form-control" :class="  {'invalid': !isInputValid}">
       <label for="user-name">Your Name</label>
-      <input id="user-name" name="user-name" type="text" v-model="userName" />
+      <input id="user-name" name="user-name" type="text" v-model.trim="userName" @blur="validateInput()"/>
+      <p v-if="!isInputValid">Name input is invalid</p>
+
     </div>
     <div class="form-control">
       <label for="age">Your Age (Years)</label>
@@ -68,7 +70,8 @@ export default ({
       referrer: 'google', // Default value for the select input
       interest: [], // Default value for the checkboxes
       how: null, // Default value for the radio buttons
-      // confirmTerms: false // Default value for the checkbox
+      confirmTerms: false, // Default value for the checkbox
+      isInputValid: true, // Track if the input is valid
 
     };
   },
@@ -89,7 +92,20 @@ export default ({
       this.interest = []; // Reset checkboxes
       this.how = null; // Reset radio buttons
       this.confirmTerms = false; // Reset checkbox
-    }
+    },
+    validateInput() {
+      // Simple validation to check if the userName is not empty
+      // this.isInputValid = this.userName.trim() !== '';
+      // if (!this.isInputValid) {
+      //   alert('Please enter a valid name.');
+      // }
+
+      if(this.userName === '') {
+        this.isInputValid = false;
+      } else {
+        this.isInputValid = true;
+      }
+    },
   },
 })
 </script>
@@ -107,6 +123,11 @@ form {
 
 .form-control {
   margin: 0.5rem 0;
+}
+
+
+.form-control.invalid  {
+  color:red;
 }
 
 label {
