@@ -48,6 +48,12 @@
         <label for="how-other">Other</label>
       </div>
     </div>
+
+    <div class="form-control">
+      <RatingControl v-model="rating"></RatingControl>
+    </div>
+
+
     <div class="form-control">
       <input type="checkbox" id="confirm-terms" name="confirm-terms" v-model="confirmTerms"/> 
       <label for="confirm-terms">I confirm the terms and conditions</label>
@@ -60,8 +66,13 @@
 
 <script>
 
+import RatingControl from './RatingControl.vue';  
+
 
 export default ({
+  components: {
+    RatingControl, // Register the RatingControl component
+  },
 
   data() {
     return {
@@ -72,6 +83,8 @@ export default ({
       how: null, // Default value for the radio buttons
       confirmTerms: false, // Default value for the checkbox
       isInputValid: true, // Track if the input is valid
+      rating: null
+
 
     };
   },
@@ -84,7 +97,8 @@ export default ({
         referrer: this.referrer,
         interest: this.interest,
         how: this.how,
-        confirmTerms: this.confirmTerms
+        confirmTerms: this.confirmTerms,
+        rating: this.rating
       });
       this.userName = '';
       this.userAge = null;
@@ -92,6 +106,7 @@ export default ({
       this.interest = []; // Reset checkboxes
       this.how = null; // Reset radio buttons
       this.confirmTerms = false; // Reset checkbox
+      this.rating = null; // Reset rating
     },
     validateInput() {
       // Simple validation to check if the userName is not empty
