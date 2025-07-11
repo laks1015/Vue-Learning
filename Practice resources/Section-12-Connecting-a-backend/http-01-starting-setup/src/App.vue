@@ -1,6 +1,8 @@
 <template>
-  <learning-survey @survey-submit="storeSurvey"></learning-survey>
+  <div>  <learning-survey @survey-submit="storeSurvey"></learning-survey>
   <user-experiences :results="savedSurveyResults"></user-experiences>
+</div>
+
 </template>
 
 <script>
