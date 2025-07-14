@@ -21,6 +21,7 @@
           <label for="rating-great">Great</label>
         </div>
         <p v-if="invalidInput">One or more input fields are invalid. Please check your provided data.</p>
+        <p v-if="errorMessage">{{ errorMessage }}</p>
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -37,6 +38,7 @@ export default {
       enteredName: '',
       chosenRating: null,
       invalidInput: false,
+      errorMessage: null,
     };
   },
   // emits: ['survey-submit'],
@@ -65,10 +67,13 @@ export default {
       //     rating: this.chosenRating,
       //   }),
       // });
-
+      this.errorMessage = null;
       axios.post('https://vue-https-demo-5979e-default-rtdb.firebaseio.com/surveyResults.json', {
         name: this.enteredName,
         rating: this.chosenRating,
+      }).catch((error) => {
+        console.error('Error submitting survey:', error);
+        this.errorMessage = 'Failed to submit survey. Please try again later.';
       });
 
       this.enteredName = '';

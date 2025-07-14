@@ -6,7 +6,7 @@
   <!-- <user-experiences :results="savedSurveyResults"></user-experiences> -->
 
     <learning-survey></learning-survey>
-    <user-experiences :results="savedSurveyResults"></user-experiences>
+    <user-experiences></user-experiences>
 
 </div>
 
