@@ -1,6 +1,13 @@
 <template>
-  <div>  <learning-survey @survey-submit="storeSurvey"></learning-survey>
-  <user-experiences :results="savedSurveyResults"></user-experiences>
+  <div>  
+    <!-- no longer need to bind survey submit method because we are not using it anymore -->
+  <!-- <learning-survey @survey-submit="storeSurvey"></learning-survey> -->
+
+  <!-- <user-experiences :results="savedSurveyResults"></user-experiences> -->
+
+    <learning-survey></learning-survey>
+    <user-experiences :results="savedSurveyResults"></user-experiences>
+
 </div>
 
 </template>
@@ -14,22 +21,24 @@ export default {
     LearningSurvey,
     UserExperiences,
   },
-  data() {
-    return {
-      savedSurveyResults: [],
-    };
-  },
-  methods: {
-    storeSurvey(surveyData) {
-      const surveyResult = {
-        name: surveyData.userName,
-        rating: surveyData.rating,
-        id: new Date().toISOString(),
-      };
-      this.savedSurveyResults.push(surveyResult);
-      console.log(surveyResult);
-    },
-  },
+
+  // don't need this anymore as we are using the LearningSurvey component with Firebase so we don't need to store the survey results locally in this component
+  // data() {
+  //   return {
+  //     savedSurveyResults: [],
+  //   };
+  // },
+  // methods: {
+  //   storeSurvey(surveyData) {
+  //     const surveyResult = {
+  //       name: surveyData.userName,
+  //       rating: surveyData.rating,
+  //       id: new Date().toISOString(),
+  //     };
+  //     this.savedSurveyResults.push(surveyResult);
+  //     console.log(surveyResult);
+  //   },
+  // },
 };
 </script>
 
