@@ -71,6 +71,14 @@ export default {
       axios.post('https://vue-https-demo-5979e-default-rtdb.firebaseio.com/surveyResults.json', {
         name: this.enteredName,
         rating: this.chosenRating,
+      }).then(response =>{
+        // this .them always responds when there is no technical error
+        if(response.ok){
+          console.log('Survey submitted successfully:', response.data);
+        } else {
+          throw new Error('Network response was not ok');
+          // using the error contructor built into JavaScript that then jumps to the catch block and uses the error message set there
+        }
       }).catch((error) => {
         console.error('Error submitting survey:', error);
         this.errorMessage = 'Failed to submit survey. Please try again later.';
