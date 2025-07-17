@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
 import TeamsList from './components/teams/TeamsList.vue';
 import UsersList from './components/users/UsersList.vue';
+import TeamMembers from './components/teams/TeamMembers.vue';
 
 const router = createRouter({
     // history options tells the router how to manage the routing history, so when users nav back adn forth, the history makes sure the rotuer knows what the lat page was
@@ -15,7 +16,9 @@ const router = createRouter({
         // path: is the url path that should navigate to this component
         {path: '/teams' , component: TeamsList},
         {path: '/users' , component: UsersList},
-    
+        // this is a dynamic route, so the :teamId will be replaced with the actual team id
+        {path: '/teams/:teamId', component: TeamMembers},
+        
     ],
     // this changes the class that is added to the active link to this cusotm class, so you take control of the active link class
     // by default, vue adds the class 'router-link-active' to the active link,

@@ -2,13 +2,23 @@
   <li>
     <h3>{{ name }}</h3>
     <div class="team-members">{{ memberCount }} Members</div>
-    <a href="#">View Members</a>
+    <!-- this a link navigates to nothing and we want it to navigate to the /teams/:teamID based on the selected teams ID on the card -->
+    <!-- <a href="#">View Members</a> -->
+
+    <router-link :to="teamMembersLink">View Members</router-link>
+
   </li>
 </template>
 
 <script>
 export default {
-  props: ['name', 'memberCount'],
+  props: ['name', 'memberCount', 'id'],
+  computed:{
+    teamMembersLink() {
+      // this will create a link to the team members page with the team id in a more efecient way
+      return '/teams/' + this.id;
+    },
+  }
 };
 </script>
 

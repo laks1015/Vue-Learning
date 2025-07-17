@@ -1,10 +1,12 @@
 <template>
+
   <ul>
     <teams-item
       v-for="team in teams"
       :key="team.id"
       :name="team.name"
       :member-count="team.members.length"
+      :id="team.id"
     ></teams-item>
   </ul>
 </template>
@@ -17,6 +19,7 @@ export default {
     TeamsItem,
   },
   inject: ['teams'],
+
 };
 </script>
 

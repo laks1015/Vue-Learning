@@ -1,4 +1,6 @@
 <template>
+  <button @click="changeRoute">Back</button>
+
   <section>
     <h2>{{ teamName }}</h2>
     <ul>
@@ -19,14 +21,34 @@ export default {
   components: {
     UserItem
   },
-  data() {
+  // we want to use the real data from the teams, so we will inject the teams data from the App.vue
+  inject: ['teams', 'users'],
+  created(){
+    //  here we can access the injected data from App.vue
+    // we can use the $route.params to get the teamId from the url
+    const teamId = this.$route.params.teamId;
+    // we can find the team with the teamId from the teams data
+    const team = this.teams.find(team => team.id === teamId);
+    // we can set the teamName and members data from the team data
+    this.teamName = team.name;
+    this.members = team.members.map(memberId => {
+      // we can find the user with the memberId from the users data
+      return this.users.find(user => user.id === memberId);
+    });
+},
+data() {
     return {
-      teamName: 'Test',
-      members: [
-        { id: 'u1', fullName: 'Max Schwarz', role: 'Engineer' },
-        { id: 'u2', fullName: 'Max Schwarz', role: 'Engineer' },
-      ],
+      teamName: '',
+      members: [],
     };
+  },
+
+  methods: {
+    changeRoute() {
+      // This method can be used to navigate to a different route if needed
+      this.$router.push('/teams');
+      // we're basically adding a new route to the routes in main.js
+    },
   },
 };
 </script>

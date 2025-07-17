@@ -1,4 +1,5 @@
 <template>
+  <button @click="changeRoute">Confirm</button>
   <ul>
     <user-item v-for="user in users" :key="user.id" :name="user.fullName" :role="user.role"></user-item>
   </ul>
@@ -12,6 +13,13 @@ export default {
     UserItem,
   },
   inject: ['users'],
+  methods: {
+    changeRoute() {
+      // This method can be used to navigate to a different route if needed
+      this.$router.push('/teams');
+      // we're baically addign a new route to the routes in main.js
+    },
+  },
 };
 </script>
 
