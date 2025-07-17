@@ -24,18 +24,15 @@ export default {
   // we want to use the real data from the teams, so we will inject the teams data from the App.vue
   inject: ['teams', 'users'],
   created(){
-    //  here we can access the injected data from App.vue
-    // we can use the $route.params to get the teamId from the url
-    const teamId = this.$route.params.teamId;
-    // we can find the team with the teamId from the teams data
-    const team = this.teams.find(team => team.id === teamId);
-    // we can set the teamName and members data from the team data
-    this.teamName = team.name;
-    this.members = team.members.map(memberId => {
-      // we can find the user with the memberId from the users data
-      return this.users.find(user => user.id === memberId);
-    });
+    this.loadTeamMembers(this.$route) 
+
 },
+  watch: {
+    // we want to watch the $route.params.teamId to load the team members when the route changes
+    $route(newRoute) {
+      this.loadTeamMembers(newRoute);
+    }
+  },
 data() {
     return {
       teamName: '',
@@ -49,6 +46,20 @@ data() {
       this.$router.push('/teams');
       // we're basically adding a new route to the routes in main.js
     },
+    loadTeamMembers(route) {
+      // This method can be used to load team members if needed
+          //  here we can access the injected data from App.vue
+    // we can use the $route.params to get the teamId from the url
+    const teamId = route.params.teamId;
+    // we can find the team with the teamId from the teams data
+    const team = this.teams.find(team => team.id === teamId);
+    // we can set the teamName and members data from the team data
+    this.teamName = team.name;
+    this.members = team.members.map(memberId => {
+      // we can find the user with the memberId from the users data
+      return this.users.find(user => user.id === memberId);
+    });
+    }
   },
 };
 </script>
