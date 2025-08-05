@@ -6,6 +6,7 @@ import App from './App.vue';
 import TeamsList from './components/teams/TeamsList.vue';
 import UsersList from './components/users/UsersList.vue';
 import TeamMembers from './components/teams/TeamMembers.vue';
+import NotFound from './components/nav/NotFound.vue';
 
 const router = createRouter({
     // history options tells the router how to manage the routing history, so when users nav back adn forth, the history makes sure the rotuer knows what the lat page was
@@ -14,10 +15,12 @@ const router = createRouter({
     // tells vue which vue coimpoennts should be loaded for which url
     routes: [
         // path: is the url path that should navigate to this component
+        {path: '/', redirect: '/teams   '}, // this is the default route, so when the user goes to the root url, it will redirect to the /teams list qand show the teams list component    
         {path: '/teams' , component: TeamsList},
         {path: '/users' , component: UsersList},
         // this is a dynamic route, so the :teamId will be replaced with the actual team id
         {path: '/teams/:teamId', component: TeamMembers},
+        {path: '/:notFound(.*)', component: NotFound    }, // this is a catch-all route, so if the user goes to a url that does not exist, it will rload the NotFound component
         
     ],
     // this changes the class that is added to the active link to this cusotm class, so you take control of the active link class
