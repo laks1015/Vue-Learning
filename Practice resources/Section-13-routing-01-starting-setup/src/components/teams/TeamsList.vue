@@ -9,6 +9,9 @@
       :id="team.id"
     ></teams-item>
   </ul>
+    <router-view></router-view> 
+
+
 </template>
 
 <script>

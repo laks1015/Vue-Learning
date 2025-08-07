@@ -16,10 +16,14 @@ const router = createRouter({
     routes: [
         // path: is the url path that should navigate to this component
         {path: '/', redirect: '/teams   '}, // this is the default route, so when the user goes to the root url, it will redirect to the /teams list qand show the teams list component    
-        {path: '/teams' , component: TeamsList},
+        {path: '/teams' , component: TeamsList
+            , children: [
+                // this is a nested route, so the TeamMembers component will be loaded inside the TeamsList component 
+        {path: ':teamId', component: TeamMembers, props:true} ]
+        },
         {path: '/users' , component: UsersList},
         // this is a dynamic route, so the :teamId will be replaced with the actual team id
-        {path: '/teams/:teamId', component: TeamMembers},
+        // {path: '/teams/:teamId', component: TeamMembers},
         {path: '/:notFound(.*)', component: NotFound    }, // this is a catch-all route, so if the user goes to a url that does not exist, it will rload the NotFound component
         
     ],

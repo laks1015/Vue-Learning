@@ -1,5 +1,6 @@
 <template>
-  <button @click="changeRoute">Back</button>
+  <div><button @click="changeRoute">Close list</button></div>
+  
 
   <section>
     <h2>{{ teamName }}</h2>
@@ -81,5 +82,10 @@ ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+div{
+  display: flex;
+  justify-content: space-around;
 }
 </style>
