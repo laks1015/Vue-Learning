@@ -16,7 +16,11 @@ export default {
   computed:{
     teamMembersLink() {
       // this will create a link to the team members page with the team id in a more efecient way
-      return '/teams/' + this.id;
+      // return '/teams/' + this.id;
+      return  {
+        name: 'team-members',
+        params: { teamId: this.id }
+      }; //more effecient way to route to the team members page if we change the path way because we just refeer to it by nae when we return it 
     },
   }
 };

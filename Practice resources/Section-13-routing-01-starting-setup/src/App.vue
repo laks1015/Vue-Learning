@@ -7,6 +7,8 @@
      <!-- we need to let vue know where to load the routed componenet -->
       <router-view></router-view>
   </main>
+  <footer><router-view name="footer"></router-view></footer>
+
 </template>
 
 <script>

@@ -9,8 +9,10 @@
       :id="team.id"
     ></teams-item>
   </ul>
+
     <router-view></router-view> 
 
+  <!-- <footer><router-view name="footer"></router-view></footer> -->
 
 </template>
 
