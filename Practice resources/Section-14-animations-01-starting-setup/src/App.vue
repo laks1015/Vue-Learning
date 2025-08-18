@@ -3,10 +3,13 @@
     <div class="block"></div>
     <button>Animate</button>
   </div>
-  <base-modal @close="hideDialog" v-if="dialogIsVisible">
+
+  <base-modal @close="hideDialog" :open="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
   </base-modal>
+
+
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
@@ -19,18 +22,31 @@
     </transition>
     <button @click="showParagraph">Show Paragraph</button>
   </div>
+
+
+    <div class="container">
+    <transition name="block">
+        <div class="block" v-if="blockIsVisible"></div>
+    </transition>
+    <button @click="showBlock">Show Block</button>
+  </div>
 </template>  
 
 <script>
 export default {
   data() {
     return { dialogIsVisible: false,
-              paragraphIsVisible: false
+              paragraphIsVisible: false,
+              blockIsVisible: false,
+
     };
   },
   methods: {
     showParagraph() {
      this.paragraphIsVisible = !this.paragraphIsVisible;
+    },
+    showBlock() {
+     this.blockIsVisible = !this.blockIsVisible;
     },
     showDialog() {
       this.dialogIsVisible = true;
@@ -110,4 +126,30 @@ button:active {
   opacity: 0;
   transform: translateY(-10px);
 }
+
+/* custom animation for the block */
+
+@keyframes block-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* we can apply a custom aniamtion to the transistion property. but then we dont need the leave nad enter propeties. we define it all int he active class */
+/* swe also have a custom name 'block-entr-active' vs v-enter-active because we define it in th ename property on the transistion */
+
+.block-enter-active {
+ animation: block-fade-in 0.3s ease-in;
+}
+
+.block-leave-active {
+ animation: block-fade-in 0.3s ease-out;
+
+}
+
 </style>
