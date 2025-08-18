@@ -10,14 +10,28 @@
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
+  <div class="container">
+    <transition>
+      <!-- transistion can only be used on ONE child element -->
+       <!-- we use transsition when we specifically want to animate the leaving state of a property of an element that is removed from the dom. aka it is not
+        always on the dom.  -->
+    <p v-if="paragraphIsVisible">This is toggleble Paragraph text!</p>
+    </transition>
+    <button @click="showParagraph">Show Paragraph</button>
+  </div>
 </template>  
 
 <script>
 export default {
   data() {
-    return { dialogIsVisible: false };
+    return { dialogIsVisible: false,
+              paragraphIsVisible: false
+    };
   },
   methods: {
+    showParagraph() {
+     this.paragraphIsVisible = !this.paragraphIsVisible;
+    },
     showDialog() {
       this.dialogIsVisible = true;
     },
@@ -68,5 +82,32 @@ button:active {
   padding: 2rem;
   border: 2px solid #ccc;
   border-radius: 12px;
+}
+
+.v-enter-from{
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.v-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.v-enter-to{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.v-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.v-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+.v-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 </style>
