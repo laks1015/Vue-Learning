@@ -23,6 +23,14 @@
     <button @click="showParagraph">Show Paragraph</button>
   </div>
 
+  <!-- adding a transistion with 2 child elements is only possible if one element is shown at a tme on conditional statemnt. if and else -->
+    <div class="container"> 
+      <transition name="fade-button" mode="out-in">
+        <!-- out-in = animate out animation (removal) then animatn of new elemeny (in). this prevents 2 elements from shwoing at once -->
+        <button @click="showUsers" v-if="!usersAreVisible">Show Users</button>
+        <button @click="hideUsers" v-else>Hide Users</button>
+      </transition>
+    </div>
 
     <div class="container">
     <transition name="block">
@@ -38,6 +46,7 @@ export default {
     return { dialogIsVisible: false,
               paragraphIsVisible: false,
               blockIsVisible: false,
+              usersAreVisible: false
 
     };
   },
@@ -54,6 +63,13 @@ export default {
     hideDialog() {
       this.dialogIsVisible = false;
     },
+
+    showUsers() {
+      this.usersAreVisible = true;
+    },
+    hideUsers() { 
+      this.usersAreVisible = false;
+    }
   },
 };
 </script>
@@ -151,5 +167,20 @@ button:active {
  animation: block-fade-in 0.3s ease-out;
 
 }
+
+.fade-button-enter-active{
+  transition: opacity 0.3s ease-out;
+}
+.fade-button-leave-active{
+  transition: opacity 0.3s ease-in;
+}
+.fade-button-enter-from, .fade-button-leave-to {
+  opacity: 0;
+}
+.fade-button-enter-to, .fade-button-leave-from {
+  opacity: 1;
+}
+
+
 
 </style>
