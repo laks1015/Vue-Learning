@@ -14,7 +14,16 @@
     <button @click="showDialog">Show Dialog</button>
   </div>
   <div class="container">
-    <transition>
+    <transition name ="para"
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="afterEnter"
+    @before-leave="beforeLeave"
+    @leave="leave"
+    @after-leave="afterLeave"
+    @enter-cancelled="enterCancelled"
+    @leave-cancelled="leaveCancelled"
+    >
       <!-- transistion can only be used on ONE child element -->
        <!-- we use transsition when we specifically want to animate the leaving state of a property of an element that is removed from the dom. aka it is not
         always on the dom.  -->
@@ -46,7 +55,9 @@ export default {
     return { dialogIsVisible: false,
               paragraphIsVisible: false,
               blockIsVisible: false,
-              usersAreVisible: false
+              usersAreVisible: false,
+              enterInterval: null,
+              leaveInterval: null
 
     };
   },
@@ -69,9 +80,72 @@ export default {
     },
     hideUsers() { 
       this.usersAreVisible = false;
-    }
+    },
+
+    // transition hooks aka anaimation timining controlled by javascript and not css
+    beforeEnter(el) { 
+      console.log('before enter');
+      console.log(el);
+      el.style.opacity = 0;
+    },
+      enter(el,done) { 
+      console.log('enter');
+      console.log(el);
+      let round = 1;
+      this.enterInterval=setInterval(() => {
+        el.style.opacity = round *0.1;
+        round++;
+        if(round>10){
+          clearInterval(this.enterInterval);
+          done();
+        } //let it gradually fade in over 20 ms intervals. when it reaches 100, it stop the interval
+      }, 20); //this allows us to set the time interval that the animation takes place over aka over every 20 milliseconds
+//the done aprameter helps tell vue when this animation is done. we call it when the animation is done and the vue know to call afterEnter    
+}, 
+      afterEnter(el) { 
+      console.log('after enter');
+      console.log(el);
+
+    },
+      beforeLeave(el) { 
+      console.log('before leave');
+      console.log(el);
+      el.style.opacity = 1;
+
+    },
+      leave(el, done) { 
+      console.log('leave');
+      console.log(el);
+      let round = 1;
+       this.leaveInterval = setInterval(() => {
+        el.style.opacity = 1 - round * 0.1;
+        round++;
+        if (round > 10) {
+          clearInterval(this.leaveInterval);
+          done(); // Call done to notify Vue the animation is finished
+        }
+      }, 20);
+    },
+      afterLeave(el) { 
+      console.log('after leave');
+      console.log(el);
+      el.style.opacity = 1;
   },
-};
+
+  enterCancelled(el) {
+    console.log('enter cancelled');
+    console.log(el);
+    // call this if the enter animation is cancelled midway through
+    clearInterval(this.enterInterval);
+  },
+  leaveCancelled(el) {
+    console.log('leave cancelled');
+    console.log(el);
+    // call this if the enter animation is cancelled midway through
+    clearInterval(this.leaveInterval);  
+}
+}
+}
 </script>
 
 <style>
