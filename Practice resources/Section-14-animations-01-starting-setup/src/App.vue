@@ -6,7 +6,7 @@
 // import UsersList from './components/UsersList.vue';
 export default {
   components: { 
-    UsersList 
+    // UsersList 
   },
   data() {
     return { dialogIsVisible: false,
